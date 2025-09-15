@@ -142,7 +142,11 @@ BestGroupPrice(CB, S1, 245.00, Senior)
 
 ## Solution 1
 
-### TODO
+| File                                                                                                                   | Description                                                                                                                    |
+|------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| [Problem1Solution.scala](./src/main/scala/dev/gaston/schabas/take/home/zyzygy/problem1/Problem1Solution.scala)         | Computes best price per rate group by grouping CabinPrice by cabin and rate group, then selecting minimal price.               |
+| [Problem1SolutionTest.scala](./src/test/scala/dev/gaston/schabas/take/home/zyzygy/problem1/Problem1SolutionTest.scala) | Unit tests covering multiple cabins, rates, and rate groups, validating expected best prices.                                  |
+| _Generators_                                                                                                           | ScalaCheck generators are used to produce combinations of rates and cabin prices to thoroughly test happy path and edge cases. |
 
 ---
 
