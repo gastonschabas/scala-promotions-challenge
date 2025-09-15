@@ -1,0 +1,17 @@
+*.class
+*.log
+target/
+
+### IntelliJ IDEA ###
+.idea/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+
+### Scala ###
+.bsp/
+.bloop/
+.metals/

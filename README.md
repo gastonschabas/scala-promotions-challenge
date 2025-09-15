@@ -1,0 +1,3 @@
+# Scala Promotions Challenge
+
+## TODO
