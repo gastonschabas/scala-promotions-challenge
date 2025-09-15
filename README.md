@@ -223,4 +223,7 @@ Seq(
 
 ## Solution 2
 
-### TODO
+| File                                                                                                                   | Description                                                                                                                                           |
+|------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Problem2Solution.scala](./src/main/scala/dev/gaston/schabas/take/home/zyzygy/problem2/Problem2Solution.scala)         | Implements functions to generate all valid promotion combinations. Applies maximal combinatorial filtering to ensure no combinable promo is left out. |
+| [Problem2SolutionTest.scala](./src/test/scala/dev/gaston/schabas/take/home/zyzygy/problem2/Problem2SolutionTest.scala) | Unit tests validating all sample inputs, maximal combinations, isolated promotions, and edge cases like empty lists.                                  |
