@@ -1,0 +1,24 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup sbt + Java 21
+        uses: sbt/setup-sbt@v1
+        with:
+          java-version: temurin:21
+
+      - name: Check scalafmt (sources & tests + sbt files)
+        run: sbt scalafmtCheckAll scalafmtSbtCheck
+
+      - name: Run Scala Tests
+        run: sbt test
