@@ -82,3 +82,21 @@ class Problem1SolutionTest
       groupsInResult should not contain scenario.groupWithoutPrice
     }
   }
+
+  test("getBestGroupPrices should handle duplicate identical CabinPrice entries without duplication in result") {
+    forAll(genDuplicateCabinPriceScenario) { scenario =>
+      val result = Problem1Solution.getBestGroupPrices(scenario.rates, scenario.prices)
+      result should have size 1
+      val best = result.head
+      best.cabinCode should be(scenario.expectedCabin)
+      best.rateGroup should be(scenario.expectedGroup)
+      best.price should be(scenario.expectedPrice)
+    }
+  }
+
+  test("getBestGroupPrices should return empty when rates list is empty") {
+    forAll(genEmptyRatesScenario) { scenario =>
+      val result = Problem1Solution.getBestGroupPrices(Seq.empty, scenario.prices)
+      result should be(empty)
+    }
+  }
