@@ -104,7 +104,7 @@ trait Problem1EdgeCasesGenerators extends Problem1CommonGenerators:
       price     <- genPositivePrice
     yield
       val rates = Seq(Rate(rateCode, groupCode))
-      val cp    = CabinPrice(cabinCode, rateCode, price)
+      val cp = CabinPrice(cabinCode, rateCode, price)
       val prices = Seq(cp, cp)
       DuplicateCabinPriceScenario(rates, prices, cabinCode, groupCode, price)
 
