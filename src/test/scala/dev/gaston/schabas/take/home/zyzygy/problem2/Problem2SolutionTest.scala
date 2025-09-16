@@ -111,3 +111,39 @@ class Problem2SolutionTest extends AnyFunSuite with Matchers:
     val result = Problem2Solution.combinablePromotions("P99", samplePromotions)
     result should be(empty)
   }
+
+  test("allCombinablePromotions should return the single promotion when only one exists") {
+    val single = Seq(Promotion("P1", Seq.empty))
+    val expected = Seq(PromotionCombo(Seq("P1")))
+    val result = Problem2Solution.allCombinablePromotions(single)
+    result.map(_.withSortedCodes) should contain theSameElementsAs expected.map(_.withSortedCodes)
+  }
+
+  test("allCombinablePromotions should return one combo with all when all are mutually compatible") {
+    val promos = Seq(
+      Promotion("P1", Seq.empty),
+      Promotion("P2", Seq.empty),
+      Promotion("P3", Seq.empty)
+    )
+
+    val expected = Seq(PromotionCombo(Seq("P1", "P2", "P3")))
+    val result = Problem2Solution.allCombinablePromotions(promos)
+    result.map(_.withSortedCodes) should contain theSameElementsAs expected.map(_.withSortedCodes)
+  }
+
+  test("allCombinablePromotions should ignore duplicated promotions by code") {
+    val promos = Seq(
+      Promotion("P1", Seq("P2")),
+      Promotion("P1", Seq("P3")),
+      Promotion("P2", Seq("P1")),
+      Promotion("P3", Seq.empty)
+    )
+
+    val expected = Seq(
+      PromotionCombo(Seq("P1")),
+      PromotionCombo(Seq("P2", "P3"))
+    )
+
+    val result = Problem2Solution.allCombinablePromotions(promos)
+    result.map(_.withSortedCodes) should contain theSameElementsAs expected.map(_.withSortedCodes)
+  }
