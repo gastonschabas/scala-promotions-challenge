@@ -87,3 +87,35 @@ trait Problem1EdgeCasesGenerators extends Problem1CommonGenerators:
         CabinPrice(cabinCode, rate1.rateCode, price)
       )
       MissingGroupScenario(rates, prices, cabinCode, rateCode1, rateCode2, groupCode1, groupCode2, price)
+
+  case class DuplicateCabinPriceScenario(
+    rates: Seq[Rate],
+    prices: Seq[CabinPrice],
+    expectedCabin: String,
+    expectedGroup: String,
+    expectedPrice: BigDecimal
+  )
+
+  val genDuplicateCabinPriceScenario: Gen[DuplicateCabinPriceScenario] =
+    for
+      groupCode <- genNonEmptyAlphaStr
+      cabinCode <- genNonEmptyAlphaStr
+      rateCode  <- genNonEmptyAlphaStr
+      price     <- genPositivePrice
+    yield
+      val rates = Seq(Rate(rateCode, groupCode))
+      val cp    = CabinPrice(cabinCode, rateCode, price)
+      val prices = Seq(cp, cp)
+      DuplicateCabinPriceScenario(rates, prices, cabinCode, groupCode, price)
+
+  case class EmptyRatesScenario(prices: Seq[CabinPrice])
+
+  val genEmptyRatesScenario: Gen[EmptyRatesScenario] =
+    for
+      n       <- Gen.choose(1, 10)
+      cabins  <- Gen.listOfN(n, genNonEmptyAlphaStr).map(_.distinct)
+      rateIds <- Gen.listOfN(n, genNonEmptyAlphaStr).map(_.distinct)
+      price   <- genPositivePrice
+    yield
+      val prices = cabins.zip(rateIds).map { case (c, r) => CabinPrice(c, r, price) }
+      EmptyRatesScenario(prices)
